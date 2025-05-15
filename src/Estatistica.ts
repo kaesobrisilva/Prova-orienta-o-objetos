@@ -16,12 +16,21 @@ export class Estatistica {
   }
 
   mediana() {
-    let metade = this._numeros.length / 2;
-    metade = Math.floor(metade);
-    if(this._numeros.length % 2 === 1){
-      return this._numeros[metade];
+    const vetor = this._numeros
+    let resposta = [];
+    const tamanho = vetor.length;
+    while (resposta.length < tamanho) {
+        const menorValor = Math.min(...vetor);
+        resposta.push(menorValor);
+        const indiceDoMenorValor = vetor.indexOf(menorValor);
+        vetor.splice(indiceDoMenorValor, 1);
     }
-      return (this._numeros[metade] + this._numeros[metade - 1]) / 2;
+    let metade = resposta.length / 2;
+    metade = Math.floor(metade);
+    if(resposta.length % 2 === 1){
+      return resposta[metade];
+    }
+      return (resposta[metade] + resposta[metade - 1]) / 2;
   }
 
   moda() {
